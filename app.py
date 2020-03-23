@@ -41,7 +41,7 @@ def get_all_tasks():
     tasks = Task.query.order_by(Task.date_created).all()
     return render_template('index.html', tasks=tasks)
 
-@app.route('/update/<int:id>', methods=['POST'])
+@app.route('/update/<int:id>', methods=['PUT'])
 def update_task(id):
     task = Task.query.get_or_404(id)
     if request.method == 'POST':
@@ -53,7 +53,7 @@ def update_task(id):
             return 'There was an issue updating your task'
 
 
-@app.route('/delete/<int:id>')
+@app.route('/delete/<int:id>', methods=['DELETE'])
 def delete_task(id):
     task_to_delete = Task.query.get_or_404(id)
     try:
