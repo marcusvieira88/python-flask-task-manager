@@ -44,13 +44,12 @@ def get_all_tasks():
 @app.route('/update/<int:id>', methods=['PUT'])
 def update_task(id):
     task = Task.query.get_or_404(id)
-    if request.method == 'POST':
-        task.content = request.form['content']
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue updating your task'
+    task.content = request.form['content']
+    try:
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was an issue updating your task'
 
 
 @app.route('/delete/<int:id>', methods=['DELETE'])
